@@ -64,7 +64,15 @@ export default function App() {
                 Remover
               </button>
             </div>
+
             <MapViewer data={data} />
+
+            <div className="mt-4 text-sm text-gray-700">
+              <p><strong>Tipo:</strong> {data.type}</p>
+              {'features' in data && Array.isArray(data.features) && (
+                <p><strong>Total de features:</strong> {data.features.length}</p>
+              )}
+            </div>
           </div>
         ))}
       </div>
