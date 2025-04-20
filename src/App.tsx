@@ -48,8 +48,9 @@ export default function App() {
   }
 
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
-       <ThemeToggle />
+    <main className="min-h-screen p-8 bg-gray-50 text-black dark:bg-gray-900 dark:text-white">
+      <ThemeToggle />
+
       <h1 className="text-2xl font-bold mb-4">GeoJSON Viewer</h1>
 
       <GeoJsonUploader onUpload={handleUpload} />
@@ -69,19 +70,19 @@ export default function App() {
 
       <div className="space-y-10 mt-8">
         {Object.entries(geojsons).map(([name, data]) => (
-          <div key={name} className="p-4 bg-white border rounded-lg shadow">
+          <div key={name} className="p-4 bg-white dark:bg-gray-800 border rounded-lg shadow">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-lg font-semibold">{name}</h2>
               <div className="flex gap-2">
                 <button
                   onClick={() => handleDownload(name)}
-                  className="text-blue-600 text-sm hover:underline"
+                  className="text-blue-600 dark:text-blue-400 text-sm hover:underline"
                 >
                   Baixar
                 </button>
                 <button
                   onClick={() => handleDelete(name)}
-                  className="text-red-500 text-sm hover:underline"
+                  className="text-red-500 dark:text-red-400 text-sm hover:underline"
                 >
                   Remover
                 </button>
@@ -90,10 +91,26 @@ export default function App() {
 
             <MapViewer data={data} />
 
-            <div className="mt-4 text-sm text-gray-700">
+            <div className="mt-4 text-sm text-gray-700 dark:text-gray-300">
               <p><strong>Tipo:</strong> {data.type}</p>
               {'features' in data && Array.isArray(data.features) && (
-                <p><strong>Total de features:</strong> {data.features.length}</p>
+                <>
+                  <p><strong>Total de features:</strong> {data.features.length}</p>
+
+                  <div className="mt-3">
+                    <p className="font-medium text-sm mb-1">Prévia de dados:</p>
+                    <ul className="list-disc list-inside space-y-1">
+                      {data.features.slice(0, 5).map((f: any, idx: number) => (
+                        <li key={idx}>
+                          {Object.entries(f.properties || {})
+                            .slice(0, 3)
+                            .map(([key, value]) => `${key}: ${value}`)
+                            .join(' | ')}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
               )}
             </div>
           </div>
