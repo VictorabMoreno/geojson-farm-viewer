@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, useMap, GeoJSON } from 'react-leaflet';
-import { GeoJsonObject } from 'geojson';
+import { GeoJsonObject, Feature } from 'geojson';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -22,19 +22,36 @@ function FitBounds({ data }: { data: GeoJsonObject }) {
 }
 
 export function MapViewer({ data }: MapViewerProps) {
+  function onEachFeature(feature: Feature, layer: L.Layer) {
+    const props = feature.properties;
+    if (!props) return;
+
+    let content = '';
+
+    if (props.name) content = `<strong>${props.name}</strong>`;
+    else if (props.id) content = `<strong>ID:</strong> ${props.id}`;
+    else if (props.matricula) content = `<strong>Matrícula:</strong> ${props.matricula}`;
+    else
+      content = Object.entries(props)
+        .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
+        .join('<br />');
+
+    layer.bindPopup(content);
+  }
+
   return (
     <MapContainer
-  center={[0, 0]}
-  zoom={2}
-  scrollWheelZoom
-  style={{ height: '500px', width: '100%' }} // 👈 ESTILO INLINE FUNCIONAL
-  className="rounded-xl shadow"
->
+      center={[0, 0]}
+      zoom={2}
+      scrollWheelZoom
+      style={{ height: '500px', width: '100%' }}
+      className="rounded-xl shadow"
+    >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <GeoJSON data={data} />
+      <GeoJSON data={data} onEachFeature={onEachFeature} />
       <FitBounds data={data} />
     </MapContainer>
   );
