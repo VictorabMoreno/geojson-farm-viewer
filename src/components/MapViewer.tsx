@@ -41,12 +41,12 @@ export function MapViewer({ data }: MapViewerProps) {
 
   return (
     <MapContainer
-      center={[0, 0]}
-      zoom={2}
-      scrollWheelZoom
-      style={{ height: '500px', width: '100%' }}
-      className="rounded-xl shadow"
-    >
+        center={[0, 0]}
+        zoom={2}
+        scrollWheelZoom
+        style={{ height: '500px', width: '100%' }}
+        className="relative z-0 rounded-xl shadow"
+        >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
