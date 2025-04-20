@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vitest"],
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
