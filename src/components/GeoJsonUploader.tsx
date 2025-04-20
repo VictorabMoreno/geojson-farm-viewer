@@ -17,7 +17,7 @@ export function GeoJsonUploader({ onUpload }: Props) {
         const json = JSON.parse(reader.result as string);
         onUpload(file.name, json);
       } catch (e) {
-        alert('Arquivo inválido');
+        alert(`Erro ao ler o arquivo: ${(e as Error).message}`);
       }
     };
 
