@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapViewer } from './components/MapViewer';
 import { GeoJsonUploader } from './components/GeoJsonUploader';
 import { ThemeToggle } from './components/ThemeToggle';
+import { RawModal } from './components/RawModal';
 import {
   saveGeoJsonFiles,
   loadGeoJsonFiles,
@@ -10,6 +11,7 @@ import {
 
 export default function App() {
   const [geojsons, setGeojsons] = useState<Record<string, GeoJSON.GeoJsonObject>>({});
+  const [activeRaw, setActiveRaw] = useState<GeoJSON.GeoJsonObject | null>(null);
 
   useEffect(() => {
     const stored = loadGeoJsonFiles();
@@ -71,6 +73,12 @@ export default function App() {
       <div className="space-y-10 mt-8">
         {Object.entries(geojsons).map(([name, data]) => (
           <div key={name} className="p-4 bg-white dark:bg-gray-800 border rounded-lg shadow">
+            <button
+              onClick={() => setActiveRaw(data)}
+              className="text-gray-600 dark:text-gray-300 text-sm hover:underline"
+            >
+              Ver dados
+            </button>
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-lg font-semibold">{name}</h2>
               <div className="flex gap-2">
@@ -116,6 +124,9 @@ export default function App() {
           </div>
         ))}
       </div>
+      {activeRaw && (
+        <RawModal open={!!activeRaw} onClose={() => setActiveRaw(null)} json={activeRaw} />
+      )}
     </main>
   );
 }
