@@ -33,6 +33,19 @@ export default function App() {
     clearGeoJsonFiles();
   }
 
+  function handleDownload(name: string) {
+    const content = JSON.stringify(geojsons[name], null, 2);
+    const blob = new Blob([content], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    a.click();
+
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <main className="min-h-screen p-8 bg-gray-50">
       <h1 className="text-2xl font-bold mb-4">GeoJSON Viewer</h1>
@@ -57,12 +70,20 @@ export default function App() {
           <div key={name} className="p-4 bg-white border rounded-lg shadow">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-lg font-semibold">{name}</h2>
-              <button
-                onClick={() => handleDelete(name)}
-                className="text-red-500 text-sm hover:underline"
-              >
-                Remover
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleDownload(name)}
+                  className="text-blue-600 text-sm hover:underline"
+                >
+                  Baixar
+                </button>
+                <button
+                  onClick={() => handleDelete(name)}
+                  className="text-red-500 text-sm hover:underline"
+                >
+                  Remover
+                </button>
+              </div>
             </div>
 
             <MapViewer data={data} />
