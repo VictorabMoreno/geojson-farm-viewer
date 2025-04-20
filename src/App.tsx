@@ -4,36 +4,36 @@ import { GeoJsonUploader } from './components/GeoJsonUploader';
 import { ThemeToggle } from './components/ThemeToggle';
 import { RawModal } from './components/RawModal';
 import {
-  saveGeoJsonFiles,
-  loadGeoJsonFiles,
-  clearGeoJsonFiles
-} from './shared/storage/localStorage';
+  saveGeoJson,
+  loadAllGeoJsons,
+  removeGeoJson,
+  clearAllGeoJsons
+} from './shared/storage/geojsonStore';
 
 export default function App() {
   const [geojsons, setGeojsons] = useState<Record<string, GeoJSON.GeoJsonObject>>({});
   const [activeRaw, setActiveRaw] = useState<GeoJSON.GeoJsonObject | null>(null);
 
   useEffect(() => {
-    const stored = loadGeoJsonFiles();
-    setGeojsons(stored);
+    loadAllGeoJsons().then(setGeojsons);
   }, []);
 
   function handleUpload(name: string, data: GeoJSON.GeoJsonObject) {
     const updated = { ...geojsons, [name]: data };
     setGeojsons(updated);
-    saveGeoJsonFiles(updated);
+    saveGeoJson(name, data);
   }
-
+  
   function handleDelete(name: string) {
     const updated = { ...geojsons };
     delete updated[name];
     setGeojsons(updated);
-    saveGeoJsonFiles(updated);
+    removeGeoJson(name);
   }
-
+  
   function handleClearAll() {
     setGeojsons({});
-    clearGeoJsonFiles();
+    clearAllGeoJsons();
   }
 
   function handleDownload(name: string) {
