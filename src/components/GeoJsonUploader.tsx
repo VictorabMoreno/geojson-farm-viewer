@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import toast from 'react-hot-toast';
 
 interface Props {
   onUpload: (name: string, data: GeoJSON.GeoJsonObject) => void;
@@ -16,8 +17,9 @@ export function GeoJsonUploader({ onUpload }: Props) {
       try {
         const json = JSON.parse(reader.result as string);
         onUpload(file.name, json);
+        toast.success(`Arquivo "${file.name}" carregado com sucesso`);
       } catch (e) {
-        alert(`Erro ao ler o arquivo: ${(e as Error).message}`);
+        toast.error(`Erro ao ler o arquivo: ${(e as Error).message}`);
       }
     };
 
