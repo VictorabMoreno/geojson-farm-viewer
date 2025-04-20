@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fix para garantir que o mapa apareça corretamente */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
