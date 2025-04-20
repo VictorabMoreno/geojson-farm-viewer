@@ -3,6 +3,7 @@ import { MapViewer } from './components/MapViewer';
 import { GeoJsonUploader } from './components/GeoJsonUploader';
 import { ThemeToggle } from './components/ThemeToggle';
 import { RawModal } from './components/RawModal';
+import { GeoJsonUrlImporter } from './components/GeoJsonUrlImporter';
 import {
   saveGeoJson,
   loadAllGeoJsons,
@@ -56,7 +57,7 @@ export default function App() {
       <h1 className="text-2xl font-bold mb-4">GeoJSON Viewer</h1>
 
       <GeoJsonUploader onUpload={handleUpload} />
-
+      <GeoJsonUrlImporter onImport={handleUpload} />
       {Object.keys(geojsons).length > 0 && (
         <button
           onClick={handleClearAll}
