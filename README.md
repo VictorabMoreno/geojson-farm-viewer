@@ -1,54 +1,85 @@
-# React + TypeScript + Vite
+# 🗺️ GeoJSON Farm Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**GeoJSON Farm Viewer** é um visualizador interativo e moderno para arquivos `.geojson`, com foco em aplicações agrícolas e geoespaciais. Este projeto foi criado para demonstrar domínio em tecnologias web modernas, arquitetura de front-end, uso de mapas, armazenamento offline e PWA.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Motivação
 
-## Expanding the ESLint configuration
+Trabalho com projetos que lidam com dados geoespaciais sensíveis e, por isso, resolvi transformar parte desse conhecimento em um repositório público para:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Demonstrar boas práticas de front-end com React + Tailwind + Leaflet
+- Aplicar arquitetura realista e escalável
+- Criar um case completo com visualização de dados geográficos
+- Compartilhar parte da estrutura utilizada em apps reais
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 💡 O que esse projeto entrega
+
+- Upload de arquivos `.geojson` com preview no mapa
+- Importação via **URL externa**
+- Visualização combinada de múltiplos arquivos no **mapa único**
+- Preview textual de propriedades de cada feature
+- Download e remoção de arquivos
+- Visualização em **modal raw** dos dados brutos
+- Modo escuro com persistência local
+- Armazenamento offline com **IndexedDB**
+- Aplicação **instalável (PWA)** com suporte offline real
+- Testes automatizados com **Vitest + Testing Library**
+- Arquitetura organizada: `components/`, `hooks/`, `storage/`, `map/`
+
+---
+
+## 🧠 Stack principal
+
+- **React** + **Vite** + **TypeScript**
+- **TailwindCSS** para UI responsiva
+- **Leaflet** + **react-leaflet** para renderização geoespacial
+- **idb-keyval** para persistência offline com IndexedDB
+- **Vitest + React Testing Library** para testes
+- **vite-plugin-pwa** para transformar o app em um PWA real
+
+---
+
+## 🚀 Instalação
+
+```bash
+git clone https://github.com/seu-user/geojson-farm-viewer.git
+cd geojson-farm-viewer
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧪 Testes
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run test
 ```
+
+---
+
+
+## 📲 PWA Instalável
+
+Este projeto pode ser instalado no celular ou desktop.  
+✔️ Funciona offline  
+✔️ Cache automático  
+✔️ Adicionável à tela inicial
+
+---
+
+## 😎 Propósito
+
+Esse repositório é mantido por [@victorabmoreno](https://github.com/VictorabMoreno) como forma de:
+
+- Demonstrar domínio técnico com tecnologias modernas
+- Compartilhar um visualizador funcional e leve para uso agrícola
+- Expor boas práticas de componentização, testes e organização
+- Criar um case real de **frontend técnico com foco geoespacial**
+
+---
+
+Fique à vontade para clonar, estudar, adaptar ou contribuir ❤️
