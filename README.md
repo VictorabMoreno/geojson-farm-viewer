@@ -45,7 +45,7 @@ Trabalho com projetos que lidam com dados geoespaciais sensíveis e, por isso, r
 ## 🚀 Instalação
 
 ```bash
-git clone https://github.com/seu-user/geojson-farm-viewer.git
+git clone https://github.com/VictorabMoreno/geojson-farm-viewer.git
 cd geojson-farm-viewer
 npm install
 npm run dev
